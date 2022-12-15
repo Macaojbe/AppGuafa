@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">GUAFA</string>
+
+    <string name="label_title_products">GUAFA</string>
+    <string name="label_name">Nombre:</string>
+    <string name="label_write_your_name">Escribe tu Email</string>
+    <string name="label_last_name">Apellido:</string>
+    <string name="label_write_your_last_name">Escribe tu Contraseña</string>
+    <string name="label_age">Edad:</string>
+    <string name="label_write_your_age">Escribe tu Edad</string>
+    <string name="label_into">Ingresar</string>
+    <string name="label_back">Regresar</string>
+
+    // Product Strings Forms
+    <string name="product_form_title">REGISTRO DE PRENDAS</string>
+    <string name="product_form_name">Nombre:</string>
+    <string name="product_form_description">Descripción:</string>
+    <string name="product_form_price">Precio:</string>
+    <string name="product_form_btn">Registrar Prenda</string>
+
+
+</resources>
