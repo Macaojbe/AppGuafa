@@ -13,14 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.macobe.myproject.Adaptadores.ProductoAdaptador;
 import com.macobe.myproject.DB.DBFirebase;
-import com.macobe.myproject.DB.DBHelper;
 import com.macobe.myproject.Entidades.Producto;
 import com.macobe.myproject.Servicios.ProductService;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private DBHelper dbHelper;
     private DBFirebase dbFirebase;
     private ProductService productService;
     private ListView listViewProducts;
@@ -36,15 +34,13 @@ public class MainActivity extends AppCompatActivity {
         listaProductos = new ArrayList<>();
 
         try {
-            dbHelper = new DBHelper(this);
             dbFirebase = new DBFirebase();
             productService = new ProductService();
-            listaProductos = productService.cursorToArrayList(dbHelper.getProducts());
         } catch (Exception e) {
             Log.e("DB get", e.toString());
         }
 
-        adaptador = new ProductoAdaptador(getApplicationContext(), listaProductos);
+        adaptador = new ProductoAdaptador(this, listaProductos);
         listViewProducts.setAdapter(adaptador);
 
         dbFirebase.getProducts(adaptador, listaProductos);
@@ -58,9 +54,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.itemAdd:
-                Intent intent = new Intent(getApplicationContext(), ProductForm.class);
+                intent = new Intent(getApplicationContext(), ProductForm.class);
+                startActivity(intent);
+                return true;
+            case R.id.itemMap:
+
+                ArrayList<String>latitudes = new ArrayList<>();
+                ArrayList<String>longitudes = new ArrayList<>();
+
+                for (int i = 0; i < listaProductos.size(); i++) {
+                    latitudes.add(listaProductos.get(i).getLatitude());
+                    longitudes.add(listaProductos.get(i).getLongitude());
+                }
+
+                intent = new Intent(getApplicationContext(), Maps.class);
+                intent.putStringArrayListExtra("latitudes", latitudes);
+                intent.putStringArrayListExtra("longitudes", latitudes);
                 startActivity(intent);
                 return true;
             case R.id.itemFavorite:

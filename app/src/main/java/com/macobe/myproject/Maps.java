@@ -1,18 +1,18 @@
 package com.macobe.myproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.osmdroid.config.Configuration;
-import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
+
+import java.util.ArrayList;
 
 public class Maps extends AppCompatActivity {
 
@@ -34,23 +34,15 @@ public class Maps extends AppCompatActivity {
         mapController.setZoom(8);
         map.setMultiTouchControls(true);
 
-        MapEventsReceiver mapEventsReceiver = new MapEventsReceiver() {
-            @Override
-            public boolean singleTapConfirmedHelper(GeoPoint p) {
-                Toast.makeText(Maps.this, "Latitud: " + p.getLatitude() + "Longitud: " + p.getLongitude(), Toast.LENGTH_SHORT).show();
-                Marker marker = new Marker(map);
-                marker.setPosition(p);
-                map.getOverlays().add(marker);
-                return false;
-            }
+        Intent intentIN = getIntent();
+        ArrayList<String> latitudes = intentIN.getStringArrayListExtra("latitudes");
+        ArrayList<String> longitudes = intentIN.getStringArrayListExtra("longitudes");
 
-            @Override
-            public boolean longPressHelper(GeoPoint p) {
-                Toast.makeText(Maps.this, "Latitud: ", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        };
-        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(this, mapEventsReceiver);
-        map.getOverlays().add(mapEventsOverlay);
+        for (int i = 0; i<latitudes.size(); i++) {
+            GeoPoint geoPoint = new GeoPoint(Double.parseDouble(latitudes.get(i)),Double.parseDouble(longitudes.get(i)));
+            Marker marker = new Marker(map);
+            marker.setPosition(geoPoint);
+            map.getOverlays().add(marker);
+        }
     }
 }

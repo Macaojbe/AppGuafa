@@ -30,6 +30,9 @@ public class DBFirebase {
         prod.put("name", producto.getName());
         prod.put("description", producto.getDescription());
         prod.put("price", producto.getPrice());
+        prod.put("image", producto.getImage());
+        prod.put("latitude", producto.getLatitude());
+        prod.put("longitude", producto.getLongitude());
 
         db.collection("products").add(prod);
     }
@@ -42,17 +45,31 @@ public class DBFirebase {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Producto product = new Producto (
+                                Producto product = new Producto(
                                         document.getData().get("id").toString(),
                                         document.getData().get("name").toString(),
                                         document.getData().get("description").toString(),
-                                        Integer.parseInt(document.getData().get("price").toString())
+                                        Integer.parseInt(document.getData().get("price").toString()),
+                                        document.getData().get("image").toString(),
+                                        document.getData().get("latitude").toString(),
+                                        document.getData().get("longitude").toString()
                                 );
                                 listaProductos.add(product);
                             }
                             adaptador.notifyDataSetChanged();
+                        } else {
+                            Log.e("Error document", "Error getting documents.", task.getException());
                         }
                     }
                 });
+    }
+
+    public void updateProduct (Producto producto) {
+
+    }
+
+    public void deleteProduct (String id) {
+        db.collection("products");
+
     }
 }

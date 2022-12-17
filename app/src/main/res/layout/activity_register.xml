@@ -95,6 +95,7 @@
                 android:text="INICIAR SESIÓN"
                 android:textColor="#FFFFFF"
                 android:textSize="18dp"
+                android:textStyle="bold"
                 android:layout_marginTop="40dp"/>
         </LinearLayout>
 
@@ -112,6 +113,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="CREAR CUENTA"
                 android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 android:textSize="18dp" />
         </LinearLayout>
 

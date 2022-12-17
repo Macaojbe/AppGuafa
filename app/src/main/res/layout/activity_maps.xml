@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:background="#61EDE0A8"
         android:orientation="vertical">
 
         <TextView
@@ -18,9 +19,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="40dp"
+            android:textColor="#FE9941"
             android:text="PUNTOS DE VENTA"
+            android:textStyle="bold"
             android:layout_margin="10dp"/>
-
 
         <org.osmdroid.views.MapView
             android:id="@+id/map"

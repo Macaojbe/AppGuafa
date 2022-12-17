@@ -24,6 +24,11 @@
                 android:id="@+id/itemAdd"
                 app:showAsAction="ifRoom"
                 android:title="Agregar" />
+
+            <item
+                android:id="@+id/itemMap"
+                app:showAsAction="ifRoom"
+                android:title="Mapa" />
         </menu>
     </item>
 </menu>

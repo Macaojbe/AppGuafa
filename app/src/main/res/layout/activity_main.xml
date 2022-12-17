@@ -14,11 +14,16 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="241dp"
-            android:layout_height="102dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/logo_guafa" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="35dp"
+            android:textColor="#FE9941"
+            android:text="PRENDAS DISPONIBLES"
+            android:textStyle="bold"
+            android:layout_margin="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -43,7 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
         statement.bindString(1, producto.getName());
         statement.bindString(2, producto.getDescription());
         statement.bindString(3, String.valueOf(producto.getPrice()));
-        statement.bindBlob(4, producto.getImage());
+        statement.bindString(4, producto.getImage());
 
         statement.executeInsert();
     }

@@ -3,14 +3,12 @@ package com.macobe.myproject.Servicios;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.macobe.myproject.Entidades.Producto;
 
 import java.io.ByteArrayOutputStream;
-import java.security.Permission;
 import java.util.ArrayList;
 
 public class ProductService {
@@ -37,7 +35,9 @@ public class ProductService {
                         cursor.getString(1),
                         cursor.getString(2),
                         Integer.parseInt(cursor.getString(3)),
-                        cursor.getBlob(4)
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6)
                 );
                 list.add(producto);
             }
