@@ -5,7 +5,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -65,11 +67,36 @@ public class DBFirebase {
     }
 
     public void updateProduct (Producto producto) {
+        db.collection("products").whereEqualTo("id", producto.getId())
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document =
+                                    task.getResult().getDocuments().get(0);
 
+                            document.getReference().update(
+                                    "name", producto.getName(),
+                                    "description", producto.getDescription(),
+                                    "price", producto.getDisplayPrice(),
+                                    "image", producto.getImage(),
+                                    "latitud", producto.getLatitude(),
+                                    "longitud", producto.getLongitude()
+                            );
+                        }
+                    }
+                });
     }
 
     public void deleteProduct (String id) {
-        db.collection("products");
-
+        db.collection("products").whereEqualTo("id", id)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            document.getReference().delete();
+                        }
+                    }
+                });
     }
 }

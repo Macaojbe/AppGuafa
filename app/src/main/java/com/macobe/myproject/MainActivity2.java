@@ -29,7 +29,7 @@ public class MainActivity2 extends AppCompatActivity {
         Intent intentIN = getIntent();
         textNameInfo.setText(intentIN.getStringExtra("name"));
         textDescriptionInfo.setText(intentIN.getStringExtra("description"));
-        textPriceInfo.setText(String.valueOf(intentIN.getIntExtra("price", 0)));
+        textPriceInfo.setText(intentIN.getStringExtra("price"));
         imgInfo.setImageResource(intentIN.getIntExtra("image", 0));
 
         btnInfo.setOnClickListener(new View.OnClickListener() {

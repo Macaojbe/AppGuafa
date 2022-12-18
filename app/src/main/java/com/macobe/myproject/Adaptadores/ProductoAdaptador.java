@@ -2,19 +2,19 @@ package com.macobe.myproject.Adaptadores;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.macobe.myproject.DB.DBFirebase;
 import com.macobe.myproject.Entidades.Producto;
 import com.macobe.myproject.MainActivity;
 import com.macobe.myproject.MainActivity2;
+import com.macobe.myproject.ProductForm;
 import com.macobe.myproject.R;
 
 import java.util.ArrayList;
@@ -58,15 +58,15 @@ public class ProductoAdaptador extends BaseAdapter {
         }
 
         ImageView imgProduct = convertView.findViewById(R.id.imgProduct);
+        Button btnDelete = convertView.findViewById(R.id.btnDelete);
+        Button btnUpdate = convertView.findViewById(R.id.btnUpdate);
         TextView textNameProduct = convertView.findViewById(R.id.textNameProduct);
         TextView textPriceProduct = convertView.findViewById(R.id.textPriceProduct);
-        CheckBox checkBoxProduct = convertView.findViewById(R.id.checkBoxProduct);
 
         Producto producto = listaProductos.get(position);
 
         textNameProduct.setText(producto.getName());
         textPriceProduct.setText(producto.getDisplayPrice());
-        checkBoxProduct.setText("Agregar Al Carrito");
 
         imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +78,26 @@ public class ProductoAdaptador extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBFirebase dbFirebase;
+                dbFirebase = new DBFirebase();
+                dbFirebase.deleteProduct(producto.getId());
+                Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context.getApplicationContext(), ProductForm.class);
+                context.startActivity(intent);
+            }
+        });
+
         return convertView;
     }
 }

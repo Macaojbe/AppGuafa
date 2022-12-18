@@ -89,20 +89,32 @@ public class ProductForm extends AppCompatActivity {
         btnProductForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intentIn = getIntent();
+                String id = intentIn.getStringExtra("id");
 
-                Producto producto = new Producto(
-                        editNameProductForm.getText().toString(),
-                        editDescriptionProductForm.getText().toString(),
-                        Integer.parseInt(editPriceProductForm.getText().toString().trim()),
-                        "",
-                        latitude,
-                        longitude
-                );
-
-                dbFirebase.insertProduct(producto);
-
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                if (id.compareTo("") != 0) {
+                    Producto producto = new Producto(
+                            editNameProductForm.getText().toString(),
+                            editDescriptionProductForm.getText().toString(),
+                            Integer.parseInt(editPriceProductForm.getText().toString().trim()),
+                            "",
+                            latitude,
+                            longitude
+                    );
+                    dbFirebase.updateProduct(producto);
+                } else {
+                    Producto producto = new Producto(
+                            editNameProductForm.getText().toString(),
+                            editDescriptionProductForm.getText().toString(),
+                            Integer.parseInt(editPriceProductForm.getText().toString().trim()),
+                            "",
+                            latitude,
+                            longitude
+                    );
+                    dbFirebase.insertProduct(producto);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
