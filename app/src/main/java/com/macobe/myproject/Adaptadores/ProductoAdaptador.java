@@ -59,19 +59,13 @@ public class ProductoAdaptador extends BaseAdapter {
 
         ImageView imgProduct = convertView.findViewById(R.id.imgProduct);
         TextView textNameProduct = convertView.findViewById(R.id.textNameProduct);
-        TextView textDescriptionProduct = convertView.findViewById(R.id.textDescriptionProduct);
         TextView textPriceProduct = convertView.findViewById(R.id.textPriceProduct);
         CheckBox checkBoxProduct = convertView.findViewById(R.id.checkBoxProduct);
 
         Producto producto = listaProductos.get(position);
 
-        //byte[] image = producto.getImage();
-        //Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-
-        //imgProduct.setImageBitmap(bitmap);
         textNameProduct.setText(producto.getName());
-        textDescriptionProduct.setText(producto.getDescription());
-        textPriceProduct.setText(String.valueOf(producto.getPrice()));
+        textPriceProduct.setText(producto.getDisplayPrice());
         checkBoxProduct.setText("Agregar Al Carrito");
 
         imgProduct.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +74,7 @@ public class ProductoAdaptador extends BaseAdapter {
                 Intent intent = new Intent(context.getApplicationContext(), MainActivity2.class);
                 intent.putExtra("name", producto.getName());
                 intent.putExtra("description", producto.getDescription());
-                intent.putExtra("price", producto.getPrice());
+                intent.putExtra("price", producto.getDisplayPrice());
                 context.startActivity(intent);
             }
         });

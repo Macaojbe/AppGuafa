@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(getApplicationContext(), ProductForm.class);
                 startActivity(intent);
                 return true;
-            case R.id.itemMap:
 
+            case R.id.itemMap:
                 ArrayList<String>latitudes = new ArrayList<>();
                 ArrayList<String>longitudes = new ArrayList<>();
 
@@ -72,15 +72,18 @@ public class MainActivity extends AppCompatActivity {
 
                 intent = new Intent(getApplicationContext(), Maps.class);
                 intent.putStringArrayListExtra("latitudes", latitudes);
-                intent.putStringArrayListExtra("longitudes", latitudes);
+                intent.putStringArrayListExtra("longitudes", longitudes);
                 startActivity(intent);
                 return true;
+
             case R.id.itemFavorite:
                 Toast.makeText(getApplicationContext(), "Favoritos", Toast.LENGTH_SHORT).show();
                 return true;
+
             case R.id.itemShare:
                 Toast.makeText(getApplicationContext(), "Compartir", Toast.LENGTH_SHORT).show();
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

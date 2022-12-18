@@ -1,5 +1,7 @@
 package com.macobe.myproject.Entidades;
 
+import com.macobe.myproject.utils.MoneyUtils;
+
 import java.util.UUID;
 
 public class Producto {
@@ -69,6 +71,10 @@ public class Producto {
 
     public int getPrice() {
         return price;
+    }
+
+    public String getDisplayPrice(){
+        return MoneyUtils.currencyFormat(price);
     }
 
     public void setPrice(int price) {
