@@ -92,7 +92,7 @@ public class ProductForm extends AppCompatActivity {
                 Intent intentIn = getIntent();
                 String id = intentIn.getStringExtra("id");
 
-                if (id.compareTo("") != 0) {
+                if (id!=null && id.compareTo("") != 0) {
                     Producto producto = new Producto(
                             editNameProductForm.getText().toString(),
                             editDescriptionProductForm.getText().toString(),
